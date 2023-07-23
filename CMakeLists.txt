@@ -7,8 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 aux_source_directory(src src_files)
 
 add_executable(nkcpps src/main.cpp)
-add_executable(thread-create-and-exit src/pthreads/create_exit.cpp)
-
+add_executable(thread-create src/pthreads/create.cpp)
+add_executable(thread-exit src/pthreads/join.cpp)
 
 
 
