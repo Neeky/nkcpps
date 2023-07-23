@@ -1,5 +1,5 @@
-#include <pthread.h>
-#include <unistd.h>
+#include <pthread.h> // pthread_self, pthread_create, sleep
+#include <unistd.h>  // getpid
 #include <iostream>
 
 pthread_t ntid;
