@@ -9,7 +9,8 @@ aux_source_directory(src src_files)
 add_executable(nkcpps src/main.cpp)
 add_executable(thread-create src/pthreads/create.cpp)
 add_executable(thread-exit src/pthreads/join.cpp)
-add_executable(thread-mutex src/pthreads/mutex-lock.cpp)
+add_executable(thread-mutex-lock src/pthreads/mutex-lock.cpp)
+add_executable(thread-mutex-dead-lock src/pthreads/mutex-dead-lock.cpp)
 
 
 
