@@ -13,6 +13,7 @@ add_executable(thread-mutex-lock src/pthreads/mutex-lock.cpp)
 add_executable(thread-mutex-dead-lock src/pthreads/mutex-dead-lock.cpp)
 
 add_executable(times-time src/times/time.cpp)
+add_executable(times-timespec src/times/timespec.cpp)
 
 
 
