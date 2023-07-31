@@ -16,6 +16,8 @@ add_executable(thread-rwlock src/pthreads/rwlock.cpp)
 add_executable(times-time src/times/time.cpp)
 add_executable(times-timespec src/times/timespec.cpp)
 
+add_executable(files-open-write src/files/open-write.cpp)
+
 
 
 include(FetchContent)
