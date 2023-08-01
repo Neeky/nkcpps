@@ -10,6 +10,7 @@ add_executable(nkcpps src/main.cpp)
 add_subdirectory(src/times)
 add_subdirectory(src/pthreads)
 add_subdirectory(src/files)
+add_subdirectory(src/consoles)
 
 
 include(FetchContent)
