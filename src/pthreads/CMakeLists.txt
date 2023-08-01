@@ -1,0 +1,5 @@
+add_executable(thread-create create.cpp)
+add_executable(thread-exit join.cpp)
+add_executable(thread-mutex-lock mutex-lock.cpp)
+add_executable(thread-mutex-dead-lock mutex-dead-lock.cpp)
+add_executable(thread-rwlock rwlock.cpp)
