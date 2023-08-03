@@ -11,7 +11,7 @@ add_subdirectory(src/times)
 add_subdirectory(src/pthreads)
 add_subdirectory(src/files)
 add_subdirectory(src/consoles)
-
+add_subdirectory(src/data-struct)
 
 include(FetchContent)
 FetchContent_Declare(
