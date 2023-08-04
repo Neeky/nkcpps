@@ -1,55 +1,26 @@
 #include <stdio.h>
 #include <iostream>
 #include <ostream>
-
-template <typename T>
-class linearList
-{
-public:
-    virtual ~linearList(){};
-    virtual bool empty() const = 0;
-    // virtual int size() const = 0;
-    // virtual T &get(int theIndex) const = 0;
-    // virtual int indexOf(const T &theElement) const = 0;
-    // virtual void erase(int theIndex) = 0;
-    // virtual void insert(int theIndex, const T &theElement) = 0;
-    // virtual void output(ostream &cout) const = 0;
-};
-
-template <typename T>
-class arrayList : public linearList<T>
-{
-public:
-    arrayList(int initialCapacity = 10);
-    arrayList(const arrayList<T> &);
-    ~arrayList() { delete[] element; }
-    void checkIndex(int theIndex) const;
-    bool empty() const;
-
-private:
-    T *element;
-    int arrayLength;
-    int arraySize;
-};
+#include "array-list.h"
 
 template <typename T>
 arrayList<T>::arrayList(int initialCapacity)
 {
     this->element = new T[initialCapacity];
-    this->arrayLength = initialCapacity;
-    this->arraySize = 0;
+    this->cap = initialCapacity;
+    this->current_item_cnts = 0;
 }
 
 template <typename T>
 arrayList<T>::arrayList(const arrayList<T> &source)
 {
-    this->arrayLength = source.arrayLength;
-    this->arraySize = source.arraySize;
-    this->element = new T[source.arrayLength];
+    this->cap = source.cap;
+    this->current_item_cnts = source.current_item_cnts;
+    this->element = new T[source.cap];
     /**
      * arraySize 是用来标记已经用了几个位置的
      */
-    for (int i = 0; i < source.arraySize; i++)
+    for (int i = 0; i < source.current_item_cnts; i++)
     {
         this->element[i] = source.element[i];
     }
@@ -58,21 +29,84 @@ arrayList<T>::arrayList(const arrayList<T> &source)
 template <typename T>
 void arrayList<T>::checkIndex(int theIndex) const
 {
-    if (theIndex < 0 && theIndex >= arraySize)
+    if (theIndex < 0 || theIndex >= current_item_cnts)
     {
-        throw "index error ";
+        std::cout << "raise ... " << std::endl;
+        throw "index error";
     }
 }
 
 template <typename T>
-bool arrayList<T>::empty() const
+bool arrayList<T>::is_empty() const
 {
-    return arraySize == 0;
+    return current_item_cnts == 0;
+}
+
+template <typename T>
+int arrayList<T>::size() const
+{
+    return current_item_cnts;
+}
+
+template <typename T>
+T &arrayList<T>::get(int theIndex) const
+{
+    checkIndex(theIndex);
+
+    return element[theIndex];
+}
+
+template <typename T>
+void arrayList<T>::changeCapacity()
+{
+    if (current_item_cnts == cap)
+    {
+        std::cout << "arrayLength > arraySize not need malloc mem" << std::endl;
+        return;
+    }
+    T *tp = new T[cap * 2];
+    for (int i = 0; i < cap; i++)
+    {
+        tp[i] = element[i];
+    }
+    delete[] element;
+    element = tp;
+}
+
+template <typename T>
+void arrayList<T>::append(T &theElement)
+{
+    element[current_item_cnts] = theElement;
+    current_item_cnts++;
+}
+
+template <typename T>
+void arrayList<T>::output(std::ostream &cout) const
+{
+    cout << "[";
+    for (int i = 0; i < current_item_cnts; i++)
+    {
+        cout << element[i] << ", ";
+    }
+    cout << "]" << std::endl;
 }
 
 int main()
 {
     using namespace std;
-    arrayList<int> arr(3);
-    cout << arr.empty() << endl;
+    int size = 3;
+    arrayList<int> arr(size);
+
+    for (int i = 0; i < size; i++)
+    {
+        int value = i * 100 + 100;
+        arr.append(value);
+    }
+    cout << arr.is_empty() << endl;
+    cout << arr.size() << endl;
+    arr.checkIndex(1);
+    arr.output(std::cout);
+
+    cout << "this is the end" << endl;
+    return 0;
 }
