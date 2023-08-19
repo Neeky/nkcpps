@@ -1,0 +1,1 @@
+add_executable(nets-hostent hostent.cpp)
